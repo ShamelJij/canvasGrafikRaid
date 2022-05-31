@@ -8,9 +8,91 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <style>
+      .vl {
+        border-left: 1px solid rgb(114, 114, 114);
+        height: auto;
+      }
+      </style>
+
     <title>Canvas</title>
   </head>
-  <body style="background:#F6A631;">
+  <body style="background:#b5f1ff;">
+    <div class="containr text-center p-5">
+      <h1>Raid-Rechner</h1>
+  </div>
+  <div class="gradient-border" id="box">
+  <div class="container">
+      <div class="row p-5">
+          <div class="col">
+              <div class="form-group">
+                  <label for="waehlensie">Wählen Sie ein Raid-Level:</label>
+                  <select  class="browser-default custom-select" name="raid" id="level">
+                      <option value="jBoD">jBoD</option>
+                      <option value="0">Raid 0</option>
+                      <option value="1">Raid 1</option>
+                      <option value="5">Raid 5</option>
+                      <option value="6">Raid 6</option>
+                      <option value="10">Raid 10</option>
+                  </select>
+              </div>
+          </div>
+          <div class="col">
+              <div class="form-group">
+                  <label for="festplattenzahl">Festplattenanzahl:</label>
+                  <span id="anzahlText"></span>
+                  <input class="form-control" type="range" id="anzahl" oninput="erfassen()" step="1" min="2" max="10">
+              </div>
+          </div>
+          <div class="col">
+              <div class="form-group">
+                  <label for="kapazität">Kapazität:</label>
+                  <span id="kapazitaetText"></span>
+                  <input class="form-control" type="range" id="kapazitaet" oninput="erfassen()" step="1" min="0" max="4">
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+  <div class="container text-center">
+      <button type="button" class="btn btn-primary" onclick="ausrechnen()">Ausrechnen</button>
+  </div>
+  <hr class="mx-5">
+  <div class="container p-5">
+      <div class="row">
+          <div class="col-md text-center text-success">
+              <label for="Netto-Kapazität">Brutto-Kapazität:</label>
+              <br>
+                  <span id="brutto"></span>
+          </div>
+          <div class="vl"></div>
+          <div class="col-md text-center text-info">
+              <label for="Netto-Kapazität">Netto-Kapazität:</label>
+              <br>
+                  <span id="netto"></span>
+          </div>
+          <div class="vl"></div>
+          <div class="col-md text-center text-danger">
+              <label for="Netto-Kapazität">Speicher-Effizienz in %:</label>
+              <br>
+                  <span id="effizienz"></span>
+          </div>
+      </div>
+  </div>
+  <div class="container">
+      <div class="row">
+          <div class="col">
+              <h2 id=""></h2>
+          </div>
+      </div>
+  </div>
+  <div class="container text-center">
+      <button type="button" class="btn btn-primary" onclick="chart()">Chart</button>
+  </div>
+  <hr class="mx-5">
+  <div id="pieChart" class="container">
+      <canvas id="myChart"></canvas>
+  </div>
     <h1 class="text-center p-5">Grafik Canvas</h1>
     <div class="container d-flex justify-content-center">
         <canvas id="grafik" width="500" height="500" class="p-5 border"></canvas> 
@@ -25,6 +107,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    
+    <!-- ChartJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </body>
 </html>
