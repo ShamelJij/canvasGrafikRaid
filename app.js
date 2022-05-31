@@ -208,7 +208,7 @@ function raid5(context, platten, partitionen){
                             partitionZeichnen(context, p, r, String.fromCharCode(64 + parseInt(r)) + p);
 
                         }else{
-                            partitionZeichnen(context, p, r, String.fromCharCode(64 + parseInt(r)) + p, '#FF64C8', '#9e43b5');
+                            partitionZeichnen(context, p, r, String.fromCharCode(64 + parseInt(r)) + p, '#d368e3', '#5f1e8a');
                         }
                     }
             }

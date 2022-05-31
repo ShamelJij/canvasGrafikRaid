@@ -13,11 +13,16 @@
         border-left: 1px solid rgb(114, 114, 114);
         height: auto;
       }
+      .vlv {
+        border-left: 1px solid rgb(114, 114, 114);
+        height: auto;
+        margin: 2em;
+      }
       </style>
 
     <title>Canvas</title>
   </head>
-  <body style="background:#b5f1ff;">
+  <body style="background:#85d8ff;">
     <div class="containr text-center p-5">
       <h1>Raid-Rechner</h1>
   </div>
@@ -79,24 +84,25 @@
           </div>
       </div>
   </div>
-  <div class="container">
-      <div class="row">
-          <div class="col">
-              <h2 id=""></h2>
-          </div>
-      </div>
-  </div>
   <div class="container text-center">
       <button type="button" class="btn btn-primary" onclick="chart()">Chart</button>
   </div>
   <hr class="mx-2">
-  <div id="pieChart" class="container">
-      <canvas id="myChart"></canvas>
+  <div class="container">
+    <div class="row">
+        <div class="col-md">
+          <div id="pieChart" class="container">
+            <canvas id="myChart"></canvas>
+          </div>
+        </div>
+        <div class="vlv"></div>
+        <div class="col-md">
+          <div class="container d-flex justify-content-center p-1">
+            <canvas id="grafik" width="500" height="500" class="p-1"></canvas>
+          </div>
+        </div>
+    </div>
   </div>
-  <div class="container d-flex justify-content-center">
-      <canvas id="grafik" width="500" height="500" class="p-5 border"></canvas> 
-  </div>
-    
 
     <!-- JavaScript files -->
     <script src="app.js"></script>
