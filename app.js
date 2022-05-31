@@ -19,7 +19,7 @@ function erfassen(){
     var platten = anzahl.value;
     var context = canvas.getContext("2d");
     context.canvas.width = 80*platten;
-    context.canvas.height = 80 + 60*partitionen;
+    context.canvas.height = 80 + 40*platten;
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     switch (document.getElementById("level").value){
@@ -117,7 +117,7 @@ function chart(){
             'rgba(41, 121, 255, 1)',
             'rgba(38, 198, 218, 1)',
             'rgba(138, 178, 248, 1)',
-            'rgba(255, 100, 200, 1)',
+            'rgba(255, 100, 200, 1)',//	FF64C8
             'rgba(116, 96, 238, 1)',
             'rgba(215, 119, 74, 1)',
             'rgba(173, 92, 210, 1)',
@@ -205,12 +205,15 @@ function raid5(context, platten, partitionen){
     for (let p = 0; p < platten; p++){
                     for (let r = partitionen; r > 0; r--){
                         if((r - 1) != p){
-                            partitionZeichnen(context, p, r, String.fromCharCode(64 + r) + p);
+                            partitionZeichnen(context, p, r, String.fromCharCode(64 + parseInt(r)) + p);
+
+                        }else{
+                            partitionZeichnen(context, p, r, String.fromCharCode(64 + parseInt(r)) + p, '#FF64C8', '#9e43b5');
                         }
                     }
             }
     verbindungsLinie(context, 0, platten-1, 1);
     context.fillStyle = "#000000";
     context.font = '15pt serif';
-    context.fillText("Raid 1", 20 + 40*(platten-1), 50);
+    context.fillText("Raid 5", 20 + 40*(platten-1), 50);
 }
