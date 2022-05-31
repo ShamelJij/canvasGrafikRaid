@@ -19,22 +19,27 @@ function erfassen(){
     var platten = anzahl.value;
     var context = canvas.getContext("2d");
     context.canvas.width = 80*platten;
-    context.canvas.height = 80 + 40*partitionen;
-    
+    context.canvas.height = 80 + 60*partitionen;
+    context.clearRect(0, 0, canvas.width, canvas.height);
 
     switch (document.getElementById("level").value){
         case "0":
-            raid5(context, platten, partitionen);
+            raid0(context, platten, partitionen);
+        break;
         case "1":
-            if(anzahl.value % 2 != 0){
-                document.getElementById("anzahl").value = Math.round(document.getElementById("anzahl").value*0.5)*2;
-                document.getElementById("anzahlText").value  += Math.round(document.getElementById("anzahl").value*0.5)*2;
+            if(anzahl.value % 2 == 0){
+                //document.getElementById("anzahl").value = Math.round(document.getElementById("anzahl").value*0.5)*2;
+                //document.getElementById("anzahlText").value  += Math.round(document.getElementById("anzahl").value*0.5)*2;
+                //todo: nur grade Zahlen . alert (red alert) darf nur gerade Zahlen
                 raid1(context, platten, partitionen);
             }
         break;
         case "5":
+            partitionen = platten;
             if(anzahl.value <= 3){
                 document.getElementById("anzahlText").classList = "text-danger";
+            }else{
+                raid5(context, platten, partitionen);
             }
         break;
         case "6":
@@ -151,6 +156,17 @@ function raid1(context, platten, partitionen){
     context.fillText("Raid 1", 20 + 40*(platten-1), 50);
 }
 
+function raid0(context, platten, partitionen){
+    for (let p = 0; p < platten; p++){
+                    for (let r = partitionen; r > 0; r--){
+                            partitionZeichnen(context, p, r, "A"+ ((r-1)*platten + p));
+                    }
+            }
+    verbindungsLinie(context, 0, platten-1, 1);
+    context.fillStyle = "#000000";
+    context.font = '15pt serif';
+    context.fillText("Raid 0", 20 + 40*(platten-1), 50);
+}
 
 function verbindungsLinie(context, x1, x2, y){
     context.beginPath();
@@ -182,23 +198,15 @@ function partitionZeichnen(context, x, y, text, farbe = "#9999ff", farbe2 = "#00
     context.fillText(text, 25+80*x, 92+24*y);
 }
 
-function raid0(context, platten, partitionen){
-    for (let p = 0; p < platten; p++){
-                    for (let r = partitionen; r > 0; r--){
-                            partitionZeichnen(context, p, r, "A"+ ((r-1)*platten + p));
-                    }
-            }
-    verbindungsLinie(context, 0, platten-1, 1);
-    context.fillStyle = "#000000";
-    context.font = '15pt serif';
-    context.fillText("Raid 1", 20 + 40*(platten-1), 50);
-}
+//---------------------RAID5----------------
 
 function raid5(context, platten, partitionen){
-
+    
     for (let p = 0; p < platten; p++){
                     for (let r = partitionen; r > 0; r--){
-                            partitionZeichnen(context, p, r, "A"+ ((r-1)*platten + p));
+                        if((r - 1) != p){
+                            partitionZeichnen(context, p, r, String.fromCharCode(64 + r) + p);
+                        }
                     }
             }
     verbindungsLinie(context, 0, platten-1, 1);
